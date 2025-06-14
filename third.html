@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titan Pipes - Build to Last</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            background: #2072B2;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: 80px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 100%;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+            height: 60px;
+        }
+
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-logo span {
+            color: #2072B2;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #DAF2FF;
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: #2072B2;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin: 1rem 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 1rem;
+                font-size: 1.2rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+        }
+
+        /* Home Section */
+        #home {
+            background: #2072B2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo img {
+            height: 300px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .logo-text {
+            font-size: 3rem;
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-top: 1rem;
+        }
+
+        .pipe-design {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: 
+                linear-gradient(90deg, transparent 0%, white 2%, transparent 4%),
+                linear-gradient(0deg, transparent 0%, white 2%, transparent 4%);
+            background-size: 100px 100px;
+        }
+
+        .pipe-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .pipe {
+            position: absolute;
+            background: rgba(255,255,255,0.35);
+            border-radius: 50px;
+        }
+
+        .pipe-1 {
+            width: 300px;
+            height: 20px;
+            top: 20%;
+            left: 10%;
+            transform: rotate(15deg);
+            animation: pipeFloat1 12s ease-in-out infinite;
+        }
+
+        .pipe-2 {
+            width: 200px;
+            height: 15px;
+            top: 60%;
+            right: 15%;
+            transform: rotate(-20deg);
+            animation: pipeFloat2 10s ease-in-out infinite;
+        }
+
+        .pipe-3 {
+            width: 150px;
+            height: 12px;
+            top: 40%;
+            right: 40%;
+            transform: rotate(45deg);
+            animation: pipeFloat3 14s ease-in-out infinite;
+        }
+
+        /* Additional background shapes */
+        .background-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .circle-1 {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            top: 10%;
+            right: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .circle-2 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            bottom: 15%;
+            left: 15%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .pipe-4 {
+            width: 180px;
+            height: 16px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.4);
+            top: 25%;
+            left: 5%;
+            transform: rotate(25deg);
+            animation: pipeFloat4 8s ease-in-out infinite;
+        }
+
+        .pipe-5 {
+            width: 120px;
+            height: 12px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.35);
+            bottom: 25%;
+            right: 5%;
+            transform: rotate(-35deg);
+            animation: pipeFloat5 9s ease-in-out infinite;
+        }
+
+        .pentagon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            position: relative;
+            top: 35%;
+            left: 25%;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            animation: floatUp 5s ease-in-out infinite;
+        }
+
+        .star {
+            width: 70px;
+            height: 70px;
+            background: rgba(255,255,255,0.18);
+            position: relative;
+            top: 70%;
+            left: 70%;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: floatDown 6s ease-in-out infinite;
+        }
+
+        .octagon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.22);
+            position: relative;
+            bottom: 20%;
+            right: 25%;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            animation: floatLeft 7s ease-in-out infinite;
+        }
+
+        .hexagon {
+            width: 80px;
+            height: 46px;
+            background: rgba(255,255,255,0.2);
+            position: relative;
+            top: 45%;
+            left: 2%;
+            animation: floatDiagonal 8s ease-in-out infinite;
+        }
+
+        .hexagon:before,
+        .hexagon:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+        }
+
+        .hexagon:before {
+            bottom: 100%;
+            border-bottom: 23px solid rgba(255,255,255,0.2);
+        }
+
+        .hexagon:after {
+            top: 100%;
+            border-top: 23px solid rgba(255,255,255,0.2);
+        }
+
+        .diamond {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.18);
+            transform: rotate(45deg);
+            top: 55%;
+            right: 8%;
+            animation: floatUpDown 10s ease-in-out infinite;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes floatUp {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        @keyframes floatDown {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(25px); }
+        }
+
+        @keyframes floatLeft {
+            0%, 100% { transform: translateX(0px); }
+            50% { transform: translateX(-25px); }
+        }
+
+        @keyframes floatRight {
+            0%, 100% { transform: translateX(0px); }
+            50% { transform: translateX(20px); }
+        }
+
+        @keyframes floatLeftRight {
+            0%, 100% { transform: translateX(0px); }
+            25% { transform: translateX(-15px); }
+            75% { transform: translateX(15px); }
+        }
+
+        @keyframes floatDiagonal {
+            0%, 100% { transform: translate(0px, 0px); }
+            50% { transform: translate(-15px, -20px); }
+        }
+
+        @keyframes floatUpDown {
+            0%, 100% { transform: rotate(45deg) translateY(0px); }
+            50% { transform: rotate(45deg) translateY(-25px); }
+        }
+
+        /* Pipe Animations */
+        @keyframes pipeFloat1 {
+            0%, 100% { 
+                transform: rotate(15deg) translate(0px, 0px);
+                opacity: 0.35;
+            }
+            50% { 
+                transform: rotate(15deg) translate(10px, -15px);
+                opacity: 0.45;
+            }
+        }
+
+        @keyframes pipeFloat2 {
+            0%, 100% { 
+                transform: rotate(-20deg) translate(0px, 0px);
+                opacity: 0.35;
+            }
+            50% { 
+                transform: rotate(-20deg) translate(-12px, 18px);
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes pipeFloat3 {
+            0%, 100% { 
+                transform: rotate(45deg) translate(0px, 0px);
+                opacity: 0.35;
+            }
+            50% { 
+                transform: rotate(45deg) translate(8px, -20px);
+                opacity: 0.43;
+            }
+        }
+
+        @keyframes pipeFloat4 {
+            0%, 100% { 
+                transform: rotate(25deg) translate(0px, 0px);
+                opacity: 0.4;
+            }
+            50% { 
+                transform: rotate(25deg) translate(15px, -10px);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes pipeFloat5 {
+            0%, 100% { 
+                transform: rotate(-35deg) translate(0px, 0px);
+                opacity: 0.35;
+            }
+            50% { 
+                transform: rotate(-35deg) translate(-10px, 12px);
+                opacity: 0.45;
+            }
+        }
+
+        .home-content {
+            text-align: center;
+            z-index: 10;
+            color: white;
+        }
+
+        .home-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .home-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Gradient Section */
+        .gradient-section {
+            height: 326px;
+            background: linear-gradient(to bottom, #2072B2, #DAF2FF);
+        }
+
+        /* Main Content Sections */
+        .section {
+            background: #DAF2FF;
+            padding: 4rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* About Us Section */
+        #about {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .about-rectangle {
+            background: #E5304F;
+            width: 300px;
+            height: 400px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+            padding: 2rem;
+        }
+
+        .about-rectangle h2 {
+            color: white;
+            font-size: 1.8rem;
+            text-align: left;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-row {
+            margin-bottom: 3rem;
+        }
+
+        .about-row h3 {
+            color: #2072B2;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #2072B2 ;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .about-row p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Quality Section */
+        .quality-cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .quality-card {
+            background: white;
+            width: 280px;
+            height: 350px;
+            border-radius: 15px;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .quality-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 3px solid #2072B2;
+        }
+
+        .card-front {
+            background: white;
+        }
+
+        .card-back {
+            background: #2072B2;
+            transform: rotateY(180deg);
+            color: white;
+            padding: 2rem;
+        }
+
+        .card-front h3 {
+            color: #2072B2;
+            font-size: 1.4rem;
+            text-align: center;
+            font-weight: bold;
+            padding: 1rem;
+        }
+
+        .card-back h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-back p {
+            color: white;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Price List Section */
+        #pricelist {
+            text-align: center;
+        }
+
+        #pricelist h2 {
+            color: #2072B2;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .price-placeholder {
+            background: white;
+            height: 300px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 2px dashed #2072B2;
+        }
+
+        .price-placeholder p {
+            color: #2072B2;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background: #2072B2;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        footer p {
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        /* Section Headers */
+        .section h2 {
+            color: #2072B2;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                height: 70px;
+            }
+
+            .nav-logo {
+                height: 50px;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+
+            .nav-logo span {
+                font-size: 1.2rem;
+            }
+
+            #home {
+                margin-top: 70px;
+            }
+
+            .logo img {
+                height: 200px;
+            }
+
+            .logo-text {
+                font-size: 2rem;
+            }
+
+            .home-content h1 {
+                font-size: 1.8rem;
+            }
+
+            #about {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-rectangle {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .quality-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .quality-card {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            /* Hide some background shapes on mobile for better performance */
+            .hexagon, .diamond, .pipe-4, .pipe-5, .star, .octagon {
+                display: none;
+            }
+
+            /* Mobile scroll offset adjustment */
+            section {
+                scroll-margin-top: 70px;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Enhanced Scroll Offset for Fixed Nav - Increased for better positioning */
+        section {
+            scroll-margin-top: 120px;
+        }
+
+        /* Special adjustment for About Us section to show more content above */
+        #about-section {
+            scroll-margin-top: 140px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="lOGO.png" alt="Titan Pipes Logo">
+               
+            </div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul id="navMenu">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#about-section" onclick="closeMenu()">About Us</a></li>
+                <li><a href="#quality" onclick="closeMenu()">Quality</a></li>
+                <li><a href="#pricelist" onclick="closeMenu()">Price List</a></li>
+                <li><a href="contact.html" target="_blank">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="pipe-design"></div>
+        <div class="pipe-elements">
+            <div class="pipe pipe-1"></div>
+            <div class="pipe pipe-2"></div>
+            <div class="pipe pipe-3"></div>
+        </div>
+        
+        <!-- Additional Background Shapes -->
+        <div class="background-shapes">
+            <div class="shape circle-1"></div>
+            <div class="shape circle-2"></div>
+            <div class="shape pipe-4"></div>
+            <div class="shape pipe-5"></div>
+            <div class="shape pentagon"></div>
+            <div class="shape star"></div>
+            <div class="shape octagon"></div>
+            <div class="shape hexagon"></div>
+            <div class="shape diamond"></div>
+        </div>
+        
+        <div class="home-content">
+            <div class="logo">
+                <img src="lOGO.png" alt="Titan Pipes Logo">
+                <div class="logo-text">Build to Last,<br>Pipes you an trust</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gradient Section -->
+    <div class="gradient-section"></div>
+
+    <!-- About Us Section -->
+    <section id="about-section" class="section">
+        <div class="container">
+            <div id="about">
+            
+                <div class="about-rectangle">
+                    <h2 style="color:white; text-align: left;">BUILD <br>TO <br> LAST,<br>PIPES YOU CAN TRUST.</h2>
+                </div>
+                <div class="about-content">
+                    <div class="about-row">
+                        <h3>Who Are We</h3>
+                        <p>We are a leading manufacturer of high-quality pipes, dedicated to providing durable and reliable piping solutions for various industries. With years of experience in the field, we have established ourselves as a trusted name in the pipe manufacturing industry, serving clients across multiple sectors with our premium products.</p>
+                    </div>
+                    <div class="about-row">
+                        <h3>Our Mission</h3>
+                        <p>Our mission is to deliver superior quality pipes that meet the highest industry standards while ensuring sustainability and innovation. We strive to build lasting relationships with our customers by providing products that stand the test of time, backed by exceptional service and technical expertise.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Section -->
+    <section class="section">
+        <div class="container" id="quality">
+            <h2>Quality</h2>
+            <div class="quality-cards">
+                <div class="quality-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>Why Titan Pipes</h3>
+                        </div>
+                        <div class="card-back">
+                            <div>
+                                <h3>Why Titan Pipes</h3>
+                                <p>Our pipes are engineered with precision and manufactured using the latest technology. We deliver exceptional durability, reliability, and performance that exceeds industry standards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quality-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>Quality Assurance</h3>
+                        </div>
+                        <div class="card-back">
+                            <div>
+                                <h3>Quality Assurance</h3>
+                                <p>Every pipe undergoes rigorous testing and quality checks. Our comprehensive quality assurance program ensures consistent performance and long-lasting reliability.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quality-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>Butt-Welding</h3>
+                        </div>
+                        <div class="card-back">
+                            <div>
+                                <h3>Butt-Welding</h3>
+                                <p>Advanced butt-welding techniques ensure seamless connections and superior joint strength. Our welding process creates leak-proof, durable pipe systems.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quality-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>Optimal HDPE Pipe</h3>
+                        </div>
+                        <div class="card-back">
+                            <div>
+                                <h3>Optimal HDPE Pipe</h3>
+                                <p>Our HDPE pipes offer excellent chemical resistance, flexibility, and longevity. Perfect for various applications with optimal flow characteristics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price List Section -->
+    <section class="section" id="pricelist">
+        <div class="container">
+            <h2>Price List</h2>
+            <div class="price-placeholder">
+                <p>Price list content coming soon...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3>Titan Pipes</h3>
+            <p>Building Tomorrow's Infrastructure Today<br>
+            Premium Quality Pipes for Every Need</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.remove('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.backgroundColor = 'rgba(32, 114, 178, 0.95)';
+            } else {
+                nav.style.backgroundColor = '#2072B2';
+            }
+        });
+    </script>
+</body>
+</html>
