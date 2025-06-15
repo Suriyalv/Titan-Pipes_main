@@ -272,14 +272,26 @@
             color: #555;
         }
 
-        /* Quality Section */
+        /* Quality Section - FIXED ALIGNMENT */
         .quality-cards {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Changed from center to flex-start */
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1.5rem; /* Reduced gap for better spacing */
             margin-top: 2rem;
+            max-width: 1200px; /* Added max-width */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Desktop view - ensure cards are in a straight line */
+        @media (min-width: 1024px) {
+            .quality-cards {
+                flex-wrap: nowrap; /* Prevent wrapping on larger screens */
+                justify-content: space-between; /* Distribute evenly */
+                gap: 1rem;
+            }
         }
 
         .quality-card {
@@ -289,6 +301,7 @@
             border-radius: 15px;
             position: relative;
             perspective: 1000px;
+            flex-shrink: 0; /* Prevent cards from shrinking */
         }
 
         .card-inner {
@@ -351,32 +364,36 @@
             text-align: center;
         }
 
-        /* Price List Section */
-        #pricelist {
-            text-align: center;
+        /* Terms and Conditions Section */
+        #terms {
+            background: #f8f9fa;
         }
 
-        #pricelist h2 {
-            color: #2072B2;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
+        .terms-content {
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .price-placeholder {
+        .terms-item {
             background: white;
-            height: 300px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border: 2px dashed #2072B2;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #2072B2;
         }
 
-        .price-placeholder p {
+        .terms-item h3 {
             color: #2072B2;
-            font-size: 1.2rem;
-            font-style: italic;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .terms-item p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
         /* Footer */
@@ -460,6 +477,10 @@
                 max-width: 280px;
             }
 
+            .terms-item {
+                padding: 1.5rem;
+            }
+
             /* Mobile scroll offset adjustment */
             section {
                 scroll-margin-top: 70px;
@@ -495,8 +516,7 @@
                 <li><a href="#home" onclick="closeMenu()">Home</a></li>
                 <li><a href="#about-section" onclick="closeMenu()">About Us</a></li>
                 <li><a href="#quality" onclick="closeMenu()">Quality</a></li>
-                <li><a href="#pricelist" onclick="closeMenu()">Price List</a></li>
-                <li><a href="contact.html" target="_blank">Contact</a></li>
+                <li><a href="contact1.html" >Contact us</a></li>
             </ul>
         </div>
     </nav>
@@ -536,8 +556,8 @@
     </section>
 
     <!-- Quality Section -->
-    <section class="section">
-        <div class="container" id="quality">
+    <section class="section" id="quality">
+        <div class="container" >
             <h2>Quality</h2>
             <div class="quality-cards">
                 <div class="quality-card">
@@ -596,12 +616,17 @@
         </div>
     </section>
 
-    <!-- Price List Section -->
-    <section class="section" id="pricelist">
+    <!-- Terms and Conditions Section -->
+    <section class="section" id="terms">
         <div class="container">
-            <h2>Price List</h2>
-            <div class="price-placeholder">
-                <p>Price list content coming soon...</p>
+            <h2>Terms and Conditions</h2>
+            <div class="terms-content">
+                <div class="terms-item">
+                    <h3>1. Inclusive of 18% GST</h3>
+                    <h3>2. Forwarding Charges Extra</h3>
+                    <h3>3. Prices are subject to change withoug prior notice.</h3>
+                  
+                </div>
             </div>
         </div>
     </section>
