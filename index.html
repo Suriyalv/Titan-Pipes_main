@@ -156,7 +156,6 @@
             left: 0;
             right: 0;
             bottom: 0;
-           
             z-index: 1;
         }
 
@@ -204,7 +203,7 @@
 
         /* Gradient Section */
         .gradient-section {
-            height: 326px;
+            height: 200px;
             background: linear-gradient(to bottom, white, white);
         }
 
@@ -219,6 +218,80 @@
             margin: 0 auto;
         }
 
+        /* Products Section */
+        #products {
+            background: #f8f9fa;
+        }
+
+        .products-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .product-item {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .product-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-item:hover .product-image {
+            opacity: 0.3;
+        }
+
+        .product-description {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(32, 114, 178, 0.95);
+            color: white;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-item:hover .product-description {
+            opacity: 1;
+        }
+
+        .product-description h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .product-description p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: white;
+        }
+
         /* About Us Section */
         #about {
             display: flex;
@@ -230,7 +303,7 @@
         .about-rectangle {
             background: #E5304F;
             width: 300px;
-            height: 400px;
+            height: 450px;
             display: flex;
             align-items: flex-start;
             justify-content: flex-start;
@@ -272,15 +345,15 @@
             color: #555;
         }
 
-        /* Quality Section - FIXED ALIGNMENT */
+        /* Quality Section - INCREASED CARD HEIGHT */
         .quality-cards {
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Changed from center to flex-start */
+            align-items: flex-start;
             flex-wrap: wrap;
-            gap: 1.5rem; /* Reduced gap for better spacing */
+            gap: 1.5rem;
             margin-top: 2rem;
-            max-width: 1200px; /* Added max-width */
+            max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -288,8 +361,8 @@
         /* Desktop view - ensure cards are in a straight line */
         @media (min-width: 1024px) {
             .quality-cards {
-                flex-wrap: nowrap; /* Prevent wrapping on larger screens */
-                justify-content: space-between; /* Distribute evenly */
+                flex-wrap: nowrap;
+                justify-content: space-between;
                 gap: 1rem;
             }
         }
@@ -297,11 +370,11 @@
         .quality-card {
             background: white;
             width: 280px;
-            height: 350px;
+            height: 450px; /* Increased from 350px to 450px */
             border-radius: 15px;
             position: relative;
             perspective: 1000px;
-            flex-shrink: 0; /* Prevent cards from shrinking */
+            flex-shrink: 0;
         }
 
         .card-inner {
@@ -356,6 +429,10 @@
             font-size: 1.2rem;
             margin-bottom: 1rem;
         }
+        
+        .card-back li{
+            text-align: left;
+        }
 
         .card-back p {
             color: white;
@@ -400,8 +477,114 @@
         footer {
             background: #2072B2;
             color: white;
+            padding: 40px 0;
             text-align: center;
-            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .brochure-section {
+            text-align: center;
+        }
+
+        .brochure-section h4 {
+            font-size: 18px;
+            margin: 0 0 10px 0;
+            font-weight: 500;
+        }
+
+        .brochure-link {
+            color: whitesmoke;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid whitesmoke;
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .brochure-link:hover {
+            background-color: whitesmoke;
+            color: #2072B2;
+        }
+
+        .contact-section {
+            text-align: center;
+        }
+
+        .contact-section h4 {
+            font-size: 18px;
+            margin: 0 0 20px 0;
+            font-weight: 500;
+        }
+
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-list li {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .contact-list a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-list a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            font-size: 14px;
+            opacity: 0.8;
+            margin: 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .brochure-section,
+            .contact-section {
+                text-align: left;
+            }
+
+            .copyright {
+                text-align: center;
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-wrap: wrap;
+            }
+
+            .copyright {
+                flex-basis: 100%;
+                margin-top: 20px;
+            }
         }
 
         footer h3 {
@@ -477,6 +660,16 @@
                 max-width: 280px;
             }
 
+            .products-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .product-item {
+                width: 100%;
+                max-width: 400px;
+            }
+
             .terms-item {
                 padding: 1.5rem;
             }
@@ -492,12 +685,12 @@
             scroll-behavior: smooth;
         }
 
-        /* Enhanced Scroll Offset for Fixed Nav - Increased for better positioning */
+        /* Enhanced Scroll Offset for Fixed Nav */
         section {
             scroll-margin-top: 120px;
         }
 
-        /* Special adjustment for About Us section to show more content above */
+        /* Special adjustment for About Us section */
         #about-section {
             scroll-margin-top: 140px;
         }
@@ -509,14 +702,14 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <img src="lOGO.png" alt="Titan Pipes Logo">
-               
             </div>
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <ul id="navMenu">
                 <li><a href="#home" onclick="closeMenu()">Home</a></li>
                 <li><a href="#about-section" onclick="closeMenu()">About Us</a></li>
+                <li><a href="#products" onclick="closeMenu()">Products</a></li>
                 <li><a href="#quality" onclick="closeMenu()">Quality</a></li>
-                <li><a href="contact1.html" >Contact us</a></li>
+                <li><a href="contact1.html">Contact us</a></li>
             </ul>
         </div>
     </nav>
@@ -531,24 +724,57 @@
     </section>
 
     <!-- Gradient Section -->
-    <div class="gradient-section"></div>
+    <div class="gradient-section"></div> 
+  
 
     <!-- About Us Section -->
     <section id="about-section" class="section">
         <div class="container">
             <div id="about">
-            
                 <div class="about-rectangle">
-                    <h2 style="color:white; text-align: left;">BUILT <br>TO <br> LAST,<br>PIPES YOU CAN TRUST.</h2>
+                    <h2 style="color:white; text-align: left;">BUILT <br>TO <br> LAST,<br>PIPES<br>YOU <br>CAN TRUST.</h2>
                 </div>
                 <div class="about-content">
                     <div class="about-row">
                         <h3>Who Are We</h3>
-                        <p>We are a leading manufacturer of high-quality pipes, dedicated to providing durable and reliable piping solutions for various industries. With years of experience in the field, we have established ourselves as a trusted name in the pipe manufacturing industry, serving clients across multiple sectors with our premium products.</p>
+                        <p>TITAN PIPES is a manufacturer and supplier of high-quality High-Density Polyethylene (HDPE)
+                            products, specializing in solutions for industries ranging from construction and agriculture. Founded
+                            in 2024, we have established ourselves as a trusted name in the HDPE industry, known for
+                            innovation, reliability, and a commitment to sustainability.</p>
                     </div>
                     <div class="about-row">
                         <h3>Our Mission</h3>
-                        <p>Our mission is to deliver superior quality pipes that meet the highest industry standards while ensuring sustainability and innovation. We strive to build lasting relationships with our customers by providing products that stand the test of time, backed by exceptional service and technical expertise.</p>
+                        <p>At TITAN PIPES, our mission is to provide our customers with the highest-quality HDPE products,
+manufactured with precision and environmental responsibility. We are dedicated to advancing the
+use of durable, cost-effective, and eco-friendly materials in a wide range of applications. Our goal is
+to deliver solutions that meet our customers needs while maintaining the highest standards of
+safety, quality, and environmental stewardship.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section" id="products">
+        <div class="container">
+            <h2>Our Products</h2>
+            <div class="products-container">
+                <div class="product-item">
+                    <!-- Placeholder for HDPE Pipe Image -->
+                    <img src="hdpe.png" alt="HDPE Pipes" class="product-image">
+                    <div class="product-description">
+                        <h3>HDPE Pipes</h3>
+                        <p>High-Density Polyethylene pipes offering exceptional chemical resistance, flexibility, and durability. Perfect for water supply, gas distribution, and industrial applications. Our HDPE pipes provide long-lasting performance with excellent flow characteristics and resistance to corrosion and environmental stress cracking.</p>
+                    </div>
+                </div>
+                
+                <div class="product-item">
+                    <!-- Placeholder for PVC Pipe Image -->
+                    <img src="pvc.png" alt="PVC Pipes" class="product-image">
+                    <div class="product-description">
+                        <h3>PVC Pipes</h3>
+                        <p>Polyvinyl Chloride pipes known for their strength, lightweight design, and cost-effectiveness. Ideal for plumbing, drainage, and sewage systems. Our PVC pipes offer excellent chemical resistance, easy installation, and long service life with minimal maintenance requirements.</p>
                     </div>
                 </div>
             </div>
@@ -557,18 +783,24 @@
 
     <!-- Quality Section -->
     <section class="section" id="quality">
-        <div class="container" >
+        <div class="container">
             <h2>Quality</h2>
             <div class="quality-cards">
                 <div class="quality-card">
                     <div class="card-inner">
                         <div class="card-front">
-                            <h3>Why Titan Pipes</h3>
+                            <h3>Why Titan Pipes ?</h3>
                         </div>
                         <div class="card-back">
                             <div>
-                                <h3>Why Titan Pipes</h3>
-                                <p>Our pipes are engineered with precision and manufactured using the latest technology. We deliver exceptional durability, reliability, and performance that exceeds industry standards.</p>
+                                <h3>Why Titan Pipes ?</h3>
+                                <ul>
+                                    <li>Made from 100% virgin PE63, PE80 & PE100 materials.</li>
+                                    <li>Non-toxic, odor-free, and safe for transporting liquids.</li>
+                                    <li>UV, corrosion, and chemical resistant; low thermal conductivity.</li>
+                                    <li>Flexible, with excellent abrasion and weather resistance.</li>
+                                    <li>Smooth interior ensures high flow and minimal friction loss.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -581,7 +813,22 @@
                         <div class="card-back">
                             <div>
                                 <h3>Quality Assurance</h3>
-                                <p>Every pipe undergoes rigorous testing and quality checks. Our comprehensive quality assurance program ensures consistent performance and long-lasting reliability.</p>
+                                <ul>
+                                    <li>Strict adherence to BIS standards</li>
+                                    <li>High-quality HDPE pipes</li>
+                                    <li>Thorough checks from raw material to final product</li>
+                                    <li>Guaranteed performance and durability</li>
+                                    <li>Key tests include:
+                                        <ol>
+                                            <li>Pressure resistance</li>
+                                            <li>Strength</li>
+                                            <li>Density</li>
+                                            <li>Crack resistance</li>
+                                        </ol>
+                                    </li>
+
+
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -594,7 +841,13 @@
                         <div class="card-back">
                             <div>
                                 <h3>Butt-Welding</h3>
-                                <p>Advanced butt-welding techniques ensure seamless connections and superior joint strength. Our welding process creates leak-proof, durable pipe systems.</p>
+                                <ul>
+                                    <li>Widely used and economical method for polyethylene pipe jointing</li>
+                                    <li>Joins preheated pipes/fittings under controlled temperature and pressure</li>
+                                    <li>Used to fabricate large-diameter fittings like bends and tees</li>
+                                    <li>Requires a skilled pipe welder and welding machine</li>
+
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -602,12 +855,19 @@
                 <div class="quality-card">
                     <div class="card-inner">
                         <div class="card-front">
-                            <h3>Optimal HDPE Pipe</h3>
+                            <h3>Optimal HDPE Pipe Handling And Storage</h3>
                         </div>
                         <div class="card-back">
                             <div>
-                                <h3>Optimal HDPE Pipe</h3>
-                                <p>Our HDPE pipes offer excellent chemical resistance, flexibility, and longevity. Perfect for various applications with optimal flow characteristics.</p>
+                                <h3>Optimal HDPE Pipe Handling And Storage</h3>
+                                <ul>
+                                    <li>Workers wear PPE and be aware of job hazards</li>
+                                    <li>We use power equipment for pipes >8 inches</li>
+                                    <li>Avoid dragging or dropping pipes to prevent damage</li>
+                                    <li>Cut out damaged/kinked sections completely</li>
+                                    <li>No special care needed in cold weather</li>
+                                    <li>Store pipes in a safe, spacious area to prevent damage and allow easy access</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -624,8 +884,7 @@
                 <div class="terms-item">
                     <h3>1. Inclusive of 18% GST</h3>
                     <h3>2. Forwarding Charges Extra</h3>
-                    <h3>3. Prices are subject to change withoug prior notice.</h3>
-                  
+                    <h3>3. Prices are subject to change without prior notice.</h3>
                 </div>
             </div>
         </div>
@@ -633,10 +892,28 @@
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-        
-            <p>Building Tomorrow's Infrastructure Today<br>
-            Premium Quality Pipes for Every Need</p>
+        <div class="footer-content">
+            <div class="brochure-section">
+                <h4>Check our brochure for more information:</h4>
+                <a href="Titan Pipes Broucher RGB.pdf" target="_blank" rel="noopener noreferrer" class="brochure-link">
+                    View Brochure
+                </a>
+            </div>
+            
+            <div class="contact-section">
+                <h4>Contact Us</h4>
+                <ul class="contact-list">
+                    <li>
+                        <strong>Email:</strong> 
+                        <a href="#" onclick="openEmailDraft()">titanpipes.in@gmail.com</a>
+                    </li>
+                    <li>
+                        <strong>Phone:</strong> +91 93639 31221
+                    </li>
+                </ul>
+            </div>
+            
+            <p class="copyright">© 2024 Titan Pipes. All rights reserved.</p>
         </div>
     </footer>
 
@@ -676,7 +953,7 @@
             });
         });
 
-        // Add scroll effect to navigation - Updated to keep white background
+        // Add scroll effect to navigation
         window.addEventListener('scroll', function() {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
@@ -685,6 +962,21 @@
                 nav.style.backgroundColor = 'white';
             }
         });
+
+        function openEmailDraft() {
+            const email = 'titanpipes.in@gmail.com';
+            const subject = 'Inquiry';
+            const body = 'Hello,\n\nPlease write your message here.\n\nThank you!';
+            
+            // Try Gmail first
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Fallback to mailto
+            const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Open Gmail in new tab, fallback to mailto if user closes it quickly
+            window.open(gmailUrl, '_blank');
+        }
     </script>
 </body>
 </html>
