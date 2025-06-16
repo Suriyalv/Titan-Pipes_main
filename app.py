@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 import openpyxl
 import os
@@ -7,7 +7,9 @@ app = Flask(__name__)
 CORS(app)
 
 EXCEL_FILE = "contacts.xlsx"
+HTML_FILE = "contact1.html"
 
+# Create Excel file and headers if not exists
 def initialize_excel():
     if not os.path.exists(EXCEL_FILE):
         wb = openpyxl.Workbook()
@@ -16,10 +18,10 @@ def initialize_excel():
         sheet.append(["Name", "Phone Number", "Company Name", "Email", "Message"])
         wb.save(EXCEL_FILE)
 
-# Route to serve your HTML file
+# Serve contact.html directly from same directory
 @app.route("/")
 def contact_page():
-    return render_template("contact1.html")
+    return send_file(HTML_FILE)
 
 @app.route("/submit-form", methods=["POST"])
 def submit_form():
