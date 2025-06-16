@@ -694,10 +694,56 @@
         #about-section {
             scroll-margin-top: 140px;
         }
+        .mobile-tip {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2072B2;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            text-align: center;
+        }
+
+        .mobile-tip p {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+        }
+
+        .mobile-tip button {
+            background: white;
+            color: #2072B2;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .mobile-tip button:hover {
+            background: #f0f0f0;
+        }
+
+/* Show only on mobile and tablet */
+        @media (max-width: 1023px) {
+            .mobile-tip {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+   
+     <div class="mobile-tip" id="mobileTip">
+        <p>Tap images and cards to view more details on the Quality and Product pages</p>
+        <button onclick="document.getElementById('mobileTip').style.display='none'">Got it</button>
+    </div>
+     <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <div class="nav-logo">
